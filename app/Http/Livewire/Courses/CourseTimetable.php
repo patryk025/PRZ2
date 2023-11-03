@@ -38,6 +38,11 @@ class CourseTimetable extends LivewireCalendar
     {
         // This event is triggered when a day is clicked
         // You will be given the $year, $month and $day for that day
+        $this->dispatchBrowserEvent('openModal', [
+            'year' => $year,
+            'month' => $month,
+            'day' => $day,
+        ]);
     }
 
     public function onEventClick($eventId)

@@ -55,6 +55,33 @@
             </div>
         </div>
     </div>
+    @component('timetables.modal_course')
+        <!-- Zawartość modalu, np. formularz -->
+    @endcomponent
+    <script>
+    var modal = document.getElementById("modalCourse");
+
+    console.log(modal);
+
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    window.addEventListener('openModal', event => {
+        openModal();
+
+        console.log(event.detail.year, event.detail.month, event.detail.day);
+    });
+    </script>
 </x-app-layout>
 
 
