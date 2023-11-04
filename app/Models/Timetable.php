@@ -10,15 +10,16 @@ class Timetable extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_kursu',
         'nazwa_zajec',
         'opis_zajec',
         'data_rozpoczecia',
-        'data_zakonczenia',
+        'godz_rozpoczecia',
+        'godz_zakonczenia',
     ];
 
     protected $dates = [
         'data_rozpoczecia',
-        'data_zakonczenia',
         'created_at',
         'updated_at',
     ];

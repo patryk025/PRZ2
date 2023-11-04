@@ -49,6 +49,16 @@ class CourseTimetable extends LivewireCalendar
     {
         // This event is triggered when an event card is clicked
         // You will be given the event id that was clicked
+        $event = Lesson::find($eventId);
+
+        $this->dispatchBrowserEvent('openEditModal', [
+            'id_lekcji' => $event->id,
+            'data' => $event->data_rozpoczecia,
+            'godz_rozpoczecia' => $event->godz_rozpoczecia,
+            'godz_zakonczenia' => $event->godz_zakonczenia,
+            'nazwa_zajec' => $event->nazwa_zajec,
+            'opis_zajec' => $event->opis_zajec
+        ]);
     }
 
     public function onEventDropped($eventId, $year, $month, $day)

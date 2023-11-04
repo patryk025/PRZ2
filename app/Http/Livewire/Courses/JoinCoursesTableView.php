@@ -16,7 +16,7 @@ use App\Http\Livewire\Users\Actions\AssignWorkerRoleAction;
 use App\Http\Livewire\Users\Actions\RemoveWorkerRoleAction;
 
 
-class CoursesTableView extends TableView
+class JoinCoursesTableView extends TableView
 {
     use Actions;
 
@@ -26,10 +26,7 @@ class CoursesTableView extends TableView
     protected $model = Course::class;
 
     public $searchBy = [
-        'name',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'name'
     ];
 
     protected $paginate = 7;
@@ -42,10 +39,7 @@ class CoursesTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title(__('translation.attributes.name'))->sortBy('name'),
-            Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
-            Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
+            Header::title(__('translation.attributes.name'))->sortBy('name')
         ];
     }
 
@@ -57,17 +51,13 @@ class CoursesTableView extends TableView
     public function row($model): array
     {
         return [
-            $model->name,
-            $model->created_at,
-            $model->updated_at,
-            $model->deleted_at,
+            $model->name
         ];
     }
 
     protected function actionsByRow() {
         return [
-            new EditCourseAction('courses.edit', 'Edytuj'),
-            new ShowTimetableAction('courses.timetable', 'Wyświetl harmonogram')
+            new JoinCourseAction('courses.join', 'Dołącz do kursu')
         ];
     }
 }

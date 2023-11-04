@@ -70,6 +70,8 @@ Route::middleware([
     })->name("timetable.index");
 
     Route::get('/courses/{id}/timetable', [CoursesController::class, 'show'])->name('courses.timetable');
+    Route::post('/courses/{id}/timetable', [LessonController::class, 'create'])->name('courses.timetable_add');
+    Route::post('/courses/{id}/timetable/{timetable_id}', [LessonController::class, 'edit'])->name('courses.timetable_add');
 
     Route::get('/register', [FormRegistrationController::class, 'index'])->name('register.index');
     Route::get('/register', [FormRegistrationController::class, 'create'])->name('register.create');

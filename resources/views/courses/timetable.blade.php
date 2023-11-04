@@ -55,13 +55,12 @@
             </div>
         </div>
     </div>
-    @component('timetables.modal_course')
-        <!-- Zawartość modalu, np. formularz -->
+    @component('timetables.modal_course', ['course' => $course])
     @endcomponent
     <script>
     var modal = document.getElementById("modalCourse");
 
-    console.log(modal);
+    var course_id = "{{ $course->id }}";
 
     function openModal() {
         modal.style.display = "block";
@@ -79,7 +78,33 @@
     window.addEventListener('openModal', event => {
         openModal();
 
-        console.log(event.detail.year, event.detail.month, event.detail.day);
+        document.getElementById("modal-headline").innerText = "Dodaj zajęcia";
+
+        document.getElementById("id_lekcji").value = "";
+
+        var year = event.detail.year;
+        var month = event.detail.month;
+        var day = event.detail.day;
+
+        document.getElementById("data").value = year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
+    });
+
+    window.addEventListener('openEditModal', event => {
+        openModal();
+
+        document.getElementById("modal-headline").innerText = "Edytuj zajęcia";
+
+        document.getElementById("id_lekcji").value = event.detail.id_lekcji;
+
+        var date = event.detail.data;
+        var godz_start = event.detail.godz_start;
+        var godz_end = event.detail.godz_end;
+
+        document.getElementById("nazwa_zajec").value = event.detail.nazwa_zajec;
+        document.getElementById("opis_zajec").value = event.detail.opis_zajec;
+        document.getElementById("data").value = date;
+        document.getElementById("godz_rozpoczecia").value = godz_start;
+        document.getElementById("godz_zakonczenia").value = godz_end;
     });
     </script>
 </x-app-layout>

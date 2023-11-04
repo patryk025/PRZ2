@@ -18,8 +18,9 @@ return new class extends Migration
             $table->integer('id_kursu');
             $table->string('nazwa_zajec');
             $table->text('opis_zajec');
-            $table->dateTime('data_rozpoczecia');
-            $table->dateTime('data_zakonczenia');
+            $table->date('data_rozpoczecia');
+            $table->time('godz_rozpoczecia');
+            $table->time('godz_zakonczenia');
             $table->timestamps();
         });
     }
