@@ -46,7 +46,7 @@
                 @php
                     $extras = ['course' => $course];
                 @endphp
-                <div class="flex space-x-4">
+                <div class="flex space-x-4 justify-center">
                     <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" id="prevMonthButton" wire:click="prevMonth">Poprzedni miesiąc</button>
                     <span class="text-gray-700 font-bold" id="currentMonthAndYear"></span>
                     <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" id="nextMonthButton" wire:click="nextMonth">Następny miesiąc</button>
@@ -75,6 +75,9 @@
             modal.style.display = "none";
         }
     }
+
+    var newLesson = true;
+
     window.addEventListener('openModal', event => {
         openModal();
 
@@ -86,7 +89,9 @@
         var month = event.detail.month;
         var day = event.detail.day;
 
-        document.getElementById("data").value = year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
+        newLesson = true;
+
+        document.getElementById("data_rozpoczecia").value = year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
     });
 
     window.addEventListener('openEditModal', event => {
@@ -97,14 +102,85 @@
         document.getElementById("id_lekcji").value = event.detail.id_lekcji;
 
         var date = event.detail.data;
-        var godz_start = event.detail.godz_start;
-        var godz_end = event.detail.godz_end;
+        var godz_start = event.detail.godz_rozpoczecia;
+        var godz_end = event.detail.godz_zakonczenia;
+
+        newLesson = false;
 
         document.getElementById("nazwa_zajec").value = event.detail.nazwa_zajec;
         document.getElementById("opis_zajec").value = event.detail.opis_zajec;
-        document.getElementById("data").value = date;
+        document.getElementById("data_rozpoczecia").value = date;
         document.getElementById("godz_rozpoczecia").value = godz_start;
         document.getElementById("godz_zakonczenia").value = godz_end;
+    });
+
+    document.getElementById("lessonForm").addEventListener('submit', event => {
+        event.preventDefault();
+
+        var data = new FormData(document.getElementById("lessonForm"));
+
+        if(newLesson) {
+            fetch(`/courses/${course_id}/timetable`, {
+                method: 'POST',
+                body: data
+            }).then(response => {
+                if (response.ok) {
+                    window.livewire.emit('refreshCalendar');
+
+                    window.$wireui.notify({
+                        title: 'Zapisano',
+                        description: 'Zajęcia zostały zapisane',
+                        icon: 'success'
+                    });
+
+                    closeModal();
+                }
+                else {
+                    window.$wireui.notify({
+                        title: 'Wystąpił błąd',
+                        description: response.message,
+                        icon: 'error'
+                    })
+                }
+            }).catch(error => {
+                window.$wireui.notify({
+                    title: 'Wystąpił błąd',
+                    description: response.statusText,
+                    icon: 'error'
+                })
+            });
+        }
+        else {
+            fetch(`/courses/${course_id}/timetable/${event.target.id_lekcji.value}`, {
+                method: 'POST',
+                body: data
+            }).then(response => {
+                if (response.ok) {
+                    window.livewire.emit('refreshCalendar');
+
+                    window.$wireui.notify({
+                        title: 'Zapisano',
+                        description: 'Zajęcia zostały zapisane',
+                        icon: 'success'
+                    });
+
+                    closeModal();
+                }
+                else {
+                    window.$wireui.notify({
+                        title: 'Wystąpił bład',
+                        description: response.message,
+                        icon: 'error'
+                    })
+                }
+            }).catch(error => {
+                window.$wireui.notify({
+                    title: 'Wystąpił błąd',
+                    description: response.statusText,
+                    icon: 'error'
+                })
+            })
+        }
     });
     </script>
 </x-app-layout>

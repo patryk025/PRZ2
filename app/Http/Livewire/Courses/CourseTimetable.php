@@ -14,7 +14,7 @@ class CourseTimetable extends LivewireCalendar
     public Course $course;
 
     protected $listeners = [
-        'render' => 'updateCurrentMonthAndYear',
+        'refreshCalendar' => 'refresh',
         'prevMonth' => 'prevMonth', 
         'nextMonth' => 'nextMonth'
     ];
@@ -49,13 +49,13 @@ class CourseTimetable extends LivewireCalendar
     {
         // This event is triggered when an event card is clicked
         // You will be given the event id that was clicked
-        $event = Lesson::find($eventId);
+        $event = Timetable::find($eventId);
 
         $this->dispatchBrowserEvent('openEditModal', [
             'id_lekcji' => $event->id,
-            'data' => $event->data_rozpoczecia,
-            'godz_rozpoczecia' => $event->godz_rozpoczecia,
-            'godz_zakonczenia' => $event->godz_zakonczenia,
+            'data' => Carbon::parse($event->data_rozpoczecia)->format('Y-m-d'),
+            'godz_rozpoczecia' => Carbon::parse($event->godz_rozpoczecia)->format('H:i'),
+            'godz_zakonczenia' => Carbon::parse($event->godz_zakonczenia)->format('H:i'),
             'nazwa_zajec' => $event->nazwa_zajec,
             'opis_zajec' => $event->opis_zajec
         ]);
@@ -75,6 +75,14 @@ class CourseTimetable extends LivewireCalendar
 
     public function nextMonth()
     {
+        parent::goToNextMonth();
+        //$this->updateCurrentMonthAndYear();
+    }
+
+    public function refresh()
+    {
+        // proteza, aż czego nie wymyślimy
+        parent::goToPreviousMonth();
         parent::goToNextMonth();
         //$this->updateCurrentMonthAndYear();
     }

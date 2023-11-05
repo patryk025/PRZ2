@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\HostingController;
@@ -71,7 +72,7 @@ Route::middleware([
 
     Route::get('/courses/{id}/timetable', [CoursesController::class, 'show'])->name('courses.timetable');
     Route::post('/courses/{id}/timetable', [LessonController::class, 'create'])->name('courses.timetable_add');
-    Route::post('/courses/{id}/timetable/{timetable_id}', [LessonController::class, 'edit'])->name('courses.timetable_add');
+    Route::post('/courses/{id}/timetable/{timetable_id}', [LessonController::class, 'update'])->name('courses.timetable_edit');
 
     Route::get('/register', [FormRegistrationController::class, 'index'])->name('register.index');
     Route::get('/register', [FormRegistrationController::class, 'create'])->name('register.create');
