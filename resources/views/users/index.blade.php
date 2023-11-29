@@ -7,7 +7,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             
-            <div class="overflow-auto bg-white shadow-x1 sm:rounded-lg id="table-view-wrapper">  
+            <div class="bg-white shadow-x1 sm:rounded-lg id="table-view-wrapper">  
                 <livewire:users.users-table-view/>
                 <x-button primary label="Dodaj użytkownika" href="{{ route('users.create') }}"> </x-button>
                 

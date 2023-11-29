@@ -4,12 +4,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LessonController;
-use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CoursesController;
-use App\Http\Controllers\HostingController;
-use App\Http\Controllers\HostingTypeController;
 use App\Http\Controllers\FormRegistrationController;
-use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,12 +43,6 @@ Route::middleware([
     Route::get('async/users', [UserController::class, 'async'])
         ->name('async.users');
 
-    Route::resource('hosting-types', HostingTypeController::class)->only([
-        'index', 'create', 'edit'
-    ]);
-    Route::resource('hosting', HostingController::class);
-    Route::resource('ticket', TicketController::class);
-
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -75,8 +65,8 @@ Route::middleware([
     Route::post('/courses/{id}/timetable', [LessonController::class, 'create'])->name('courses.timetable_add');
     Route::post('/courses/{id}/timetable/{timetable_id}', [LessonController::class, 'update'])->name('courses.timetable_edit');
 
-    Route::get('/register', [FormRegistrationController::class, 'index'])->name('register.index');
-    Route::get('/register', [FormRegistrationController::class, 'create'])->name('register.create');
+    Route::get('/courses/{id}/register', [CoursesController::class, 'create'])->name('courses.join');
+    #Route::get('/register', [FormRegistrationController::class, 'create'])->name('register.create');
     Route::post('/register', [FormRegistrationController::class, 'store'])->name('register.store');
 
     Route::get('/debug_mail/{id}', [CoursesController::class, 'register'])->name('register.register');

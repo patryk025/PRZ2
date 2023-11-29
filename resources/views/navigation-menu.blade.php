@@ -26,12 +26,7 @@
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Uczestnicy') }}
                     </x-jet-nav-link>
-                    @endcan
-
-                    <x-jet-nav-link href="{{ route('register.create') }}" :active="request()->routeIs('register.create')">
-                        {{ __('Rejestracja na kursy') }}
-                    </x-jet-nav-link>
-                    
+                    @endcan                    
 
                     <x-jet-nav-link href="{{ route('courses.index') }}" :active="request()->routeIs('courses.index')">
                         {{ __('Kursy') }}

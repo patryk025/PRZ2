@@ -6,14 +6,9 @@ use App\Models\Course;
 use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
-use App\Http\Livewire\Users\Filters\UsersRoleFilter;
 use App\Http\Livewire\Courses\Actions\EditCourseAction;
-use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
+use App\Http\Livewire\Courses\Actions\JoinCourseAction;
 use App\Http\Livewire\Courses\Actions\ShowTimetableAction;
-use App\Http\Livewire\Users\Actions\AssignAdminRoleAction;
-use App\Http\Livewire\Users\Actions\RemoveAdminRoleAction;
-use App\Http\Livewire\Users\Actions\AssignWorkerRoleAction;
-use App\Http\Livewire\Users\Actions\RemoveWorkerRoleAction;
 
 
 class CoursesTableView extends TableView
@@ -66,8 +61,16 @@ class CoursesTableView extends TableView
 
     protected function actionsByRow() {
         return [
+            new JoinCourseAction('courses.join', 'Dołącz do kursu'),
             new EditCourseAction('courses.edit', 'Edytuj'),
             new ShowTimetableAction('courses.timetable', 'Wyświetl harmonogram')
         ];
+    }
+
+    public function register() {
+        $this->notification()->success(
+            $title = "Done",
+            $description = __("Twoja stara pierze w rzece.")
+        );
     }
 }
