@@ -9,6 +9,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\HostingController;
 use App\Http\Controllers\HostingTypeController;
 use App\Http\Controllers\FormRegistrationController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,4 +80,8 @@ Route::middleware([
     Route::post('/register', [FormRegistrationController::class, 'store'])->name('register.store');
 
     Route::get('/debug_mail/{id}', [CoursesController::class, 'register'])->name('register.register');
+
+    
+
+    Route::resource('teachers', TeacherController::class);
 });
