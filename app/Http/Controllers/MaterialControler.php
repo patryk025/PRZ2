@@ -41,4 +41,11 @@ class MaterialControler extends Controller
 
         return redirect()->back()->with('success', 'Plik został pomyślnie przesłany.');
     }
+
+    public function destroy($id, $material_id)
+    {
+        $material = Material::find($material_id);
+
+        $material->delete();
+    }
 }

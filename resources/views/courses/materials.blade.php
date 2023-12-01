@@ -31,7 +31,7 @@
                 <div class="bg-white p-6 rounded-lg shadow-lg mx-auto max-w-md">
                     <ul class="list-disc list-inside">
                         @foreach ($materials as $material)
-                            <li class="mb-2">{{ $material->name }} - <a href="{{ $material->path }}" class="text-blue-600 hover:text-blue-800">Pobierz</a></li>
+                            <li class="mb-2">{{ $material->name }} - <a href="{{ $material->path }}" class="text-blue-600 hover:text-blue-800">Pobierz</a><a href="{{ route('courses.materials.delete', [$course->id, $material->id]) }}" class="text-red-600 hover:text-red-800 ml-2">Usuń</a></li>
                         @endforeach
                     </ul>
                 </div>

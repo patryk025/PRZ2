@@ -68,6 +68,7 @@ Route::middleware([
     Route::post('/courses/{id}/timetable/{timetable_id}', [LessonController::class, 'update'])->name('courses.timetable_edit');
     Route::get('/courses/{id}/materials', [MaterialControler::class, 'index'])->name('courses.materials');
     Route::post('/courses/{id}/materials/create', [MaterialControler::class, 'store'])->name('courses.materials.create');
+    Route::get('/courses/{id}/materials/delete/{material_id}', [MaterialControler::class, 'destroy'])->name('courses.materials.delete');
 
     Route::get('/courses/{id}/register', [CoursesController::class, 'create'])->name('courses.join');
     #Route::get('/register', [FormRegistrationController::class, 'create'])->name('register.create');
