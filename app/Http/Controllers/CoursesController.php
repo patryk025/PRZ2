@@ -23,19 +23,29 @@ class CoursesController extends Controller
 
     public function create()
     {
-        return view(
-            'courses.form'
-        );
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('teacher')) {
+            return view(
+                'courses.form'
+            );
+        }
+        else {
+            return redirect()->route('dashboard');
+        }
     }
 
     public function edit(Course $course)
     {
-        return view(
-            'courses.form',
-            [
-                'course' => $course
-            ]
-        );
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('teacher')) {
+            return view(
+                'courses.form',
+                [
+                    'course' => $course
+                ]
+            );
+        }
+        else {
+            return redirect()->route('dashboard');
+        }
     }
 
     public function update(Request $request, Course $course)

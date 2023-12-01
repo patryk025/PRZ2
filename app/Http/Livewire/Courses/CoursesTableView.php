@@ -9,6 +9,7 @@ use LaravelViews\Views\TableView;
 use App\Http\Livewire\Courses\Actions\EditCourseAction;
 use App\Http\Livewire\Courses\Actions\JoinCourseAction;
 use App\Http\Livewire\Courses\Actions\ShowTimetableAction;
+use App\Http\Livewire\Courses\Actions\MaterialsCourseAction;
 
 
 class CoursesTableView extends TableView
@@ -63,7 +64,8 @@ class CoursesTableView extends TableView
         return [
             new JoinCourseAction('courses.join', 'Dołącz do kursu'),
             new EditCourseAction('courses.edit', 'Edytuj'),
-            new ShowTimetableAction('courses.timetable', 'Wyświetl harmonogram')
+            new ShowTimetableAction('courses.timetable', 'Wyświetl harmonogram'),
+            new MaterialsCourseAction('courses.materials', 'Materiały'),
         ];
     }
 

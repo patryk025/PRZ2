@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\MaterialControler;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\FormRegistrationController;
 
@@ -65,19 +66,14 @@ Route::middleware([
     Route::get('/courses/{id}/timetable', [CoursesController::class, 'show'])->name('courses.timetable');
     Route::post('/courses/{id}/timetable', [LessonController::class, 'create'])->name('courses.timetable_add');
     Route::post('/courses/{id}/timetable/{timetable_id}', [LessonController::class, 'update'])->name('courses.timetable_edit');
+    Route::get('/courses/{id}/materials', [MaterialControler::class, 'index'])->name('courses.materials');
+    Route::post('/courses/{id}/materials/create', [MaterialControler::class, 'store'])->name('courses.materials.create');
 
     Route::get('/courses/{id}/register', [CoursesController::class, 'create'])->name('courses.join');
     #Route::get('/register', [FormRegistrationController::class, 'create'])->name('register.create');
     Route::post('/register', [FormRegistrationController::class, 'store'])->name('register.store');
 
     Route::get('/debug_mail/{id}', [CoursesController::class, 'register'])->name('register.register');
-
-    
-
-    Route::resource('teachers', TeacherController::class);
-
-    // routes/web.php
-
 
     Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
     Route::get('/teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
@@ -86,4 +82,5 @@ Route::middleware([
     Route::put('/teachers/{teacher}', [TeacherController::class, 'update'])->name('teachers.update');
     Route::delete('/teachers/{teacher}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
 
+    //Route::resource('teachers', TeacherController::class);
 });

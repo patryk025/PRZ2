@@ -38,8 +38,6 @@ class JoinCourseAction extends Action
 
     public function renderIf($model, View $view)
     {
-        // if user doesn't have course
-
-        return $model->deleted_at === null;
+        return $model->deleted_at === null && !$model->users()->where('user_id', auth()->id())->exists();
     }
 }

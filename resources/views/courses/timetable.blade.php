@@ -168,7 +168,7 @@
                 }
                 else {
                     window.$wireui.notify({
-                        title: 'Wystąpił bład',
+                        title: 'Wystąpił błąd',
                         description: response.message,
                         icon: 'error'
                     })
