@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\FormRegistrationController;
 
 /*
@@ -74,4 +75,15 @@ Route::middleware([
     
 
     Route::resource('teachers', TeacherController::class);
+
+    // routes/web.php
+
+
+    Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
+    Route::get('/teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
+    Route::get('/teachers/{teacher}/edit', [TeacherController::class, 'edit'])->name('teachers.edit');
+    Route::post('/teachers', [TeacherController::class, 'store'])->name('teachers.store');
+    Route::put('/teachers/{teacher}', [TeacherController::class, 'update'])->name('teachers.update');
+    Route::delete('/teachers/{teacher}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
+
 });

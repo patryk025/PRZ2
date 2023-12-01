@@ -16,12 +16,12 @@ class TeacherController extends Controller
 
     public function create()
     {
-        return view('teachers.form');
+        return view('livewire.teachers.teacher-form');
     }
 
     public function edit(Teacher $teacher)
     {
-        return view('teachers.form', compact('teacher'));
+        return view('livewire.teachers.teacher-form', compact('teacher'));
     }
 
     public function update(Request $request, Teacher $teacher)
@@ -55,5 +55,22 @@ class TeacherController extends Controller
         Teacher::create($request->all());
 
         return redirect()->route('teachers.index')->with('success', 'Nauczyciel został dodany.');
+    }
+
+    // Add this method to handle the deletion of a teacher
+    public function destroy(Teacher $teacher)
+    {
+        $teacher->delete();
+
+        return redirect()->route('teachers.index')->with('success', 'Nauczyciel został usunięty.');
+    }
+
+    public $sortField = 'name';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        $this->sortField = $field;
+        $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
     }
 }
