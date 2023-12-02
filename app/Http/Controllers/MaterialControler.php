@@ -47,5 +47,7 @@ class MaterialControler extends Controller
         $material = Material::find($material_id);
 
         $material->delete();
+
+        return redirect()->back()->with('success', 'Plik został pomyślnie usunięty.');
     }
 }
