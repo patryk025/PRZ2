@@ -39,6 +39,20 @@
         </div>
     @else
         <p class="text-red-500 text-center">Dostęp ograniczony. Tylko administratorzy i nauczyciele mogą przesyłać materiały.</p>
+
+        <div class="mt-8">
+            @if ($materials->isEmpty())
+                <p class="text-center">Brak materiałów dla tego kursu.</p>
+            @else
+                <div class="bg-white p-6 rounded-lg shadow-lg mx-auto max-w-md">
+                    <ul class="list-disc list-inside">
+                        @foreach ($materials as $material)
+                            <li class="mb-2">{{ $material->name }} - <a href="{{ $material->path }}" class="text-blue-600 hover:text-blue-800">Pobierz</a><a href="{{ route('courses.materials.delete', [$course->id, $material->id]) }}" class="text-red-600 hover:text-red-800 ml-2">Usuń</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
     @endif
 </div>
 
