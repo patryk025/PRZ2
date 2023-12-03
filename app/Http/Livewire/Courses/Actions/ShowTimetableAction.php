@@ -14,6 +14,6 @@ class ShowTimetableAction extends RedirectAction
 
     public function renderIf($model, View $view)
     {
-        return $model->deleted_at === null;
+        return $model->deleted_at === null and $model->users()->where('user_id', auth()->id())->exists();
     }
 }
