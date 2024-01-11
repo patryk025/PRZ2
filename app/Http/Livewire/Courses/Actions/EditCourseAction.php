@@ -14,6 +14,7 @@ class EditCourseAction extends RedirectAction
 
     public function renderIf($model, View $view)
     {
-        return $model->deleted_at === null;
+        $user = auth()->user();
+        return $model->deleted_at === null and ($user->hasRole('admin') or $user->hasRole('teacher')) and $model->users()->where('user_id', $user->id)->exists();
     }
 }

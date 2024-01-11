@@ -69,10 +69,14 @@ class CoursesTableView extends TableView
         ];
     }
 
-    public function register() {
-        $this->notification()->success(
-            $title = "Done",
-            $description = __("Twoja stara pierze w rzece.")
-        );
+    public function register($id) {
+        $course = Course::find($id);
+        $course->users()->attach(auth()->user()->id);
+        
+        $this->notification([
+            'title' => 'Sukces',
+            'description' => 'Pomyślnie dołączono do kursu',
+            'icon' => 'success'
+        ]);
     }
 }
