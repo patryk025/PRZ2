@@ -7,6 +7,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\MaterialControler;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\FormRegistrationController;
 
 /*
@@ -82,6 +83,10 @@ Route::middleware([
     Route::post('/teachers', [TeacherController::class, 'store'])->name('teachers.store');
     Route::put('/teachers/{teacher}', [TeacherController::class, 'update'])->name('teachers.update');
     Route::delete('/teachers/{teacher}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
+
+    Route::get('/payments', [PaymentsController::class, 'index'])->name('payments.index');
+    Route::get('/payments/generate-invoice/{id}', [PaymentsController::class, 'generateInvoice'])->name('generate.invoice');
+
 
     //Route::resource('teachers', TeacherController::class);
 });

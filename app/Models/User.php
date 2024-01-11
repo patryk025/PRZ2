@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Payment;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
@@ -64,5 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function courses() {
         return $this->hasMany(Course::class);
+    }
+
+    public function payments() {
+        return $this->hasMany(Payment::class);
     }
 }

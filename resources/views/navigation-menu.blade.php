@@ -35,6 +35,10 @@
                     <x-jet-nav-link href="{{ route('teachers.index') }}" :active="request()->routeIs('teachers.index')">
                         {{ __('Nauczyciele') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('payments.index') }}" :active="request()->routeIs('payments.index')">
+                        {{ __('Płatności') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -161,18 +165,26 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
             @can('log-viewer')
-            <x-jet-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')">
                 {{ __('translation.navigation.log-viewer') }}
-            </x-jet-nav-link>
+            </x-jet-responsive-nav-link>
             @endcan
             @can('users.index')
-            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+            <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                 {{ __('translation.navigation.users') }}
-            </x-jet-nav-link>
+            </x-jet-responsive-nav-link>
             @endcan
-            <x-jet-nav-link href="{{ route('courses.index') }}" :active="request()->routeIs('courses.index')">
+            <x-jet-responsive-nav-link href="{{ route('courses.index') }}" :active="request()->routeIs('courses.index')">
                 {{ __('Kursy') }}
-            </x-jet-nav-link>
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('teachers.index') }}" :active="request()->routeIs('teachers.index')">
+                {{ __('Nauczyciele') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('payments.index') }}" :active="request()->routeIs('payments.index')">
+                {{ __('Płatności') }}
+            </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
