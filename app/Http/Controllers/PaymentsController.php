@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\User;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -51,5 +54,25 @@ class PaymentsController extends Controller
         $pdf = Pdf::loadView('payments.invoice', ['invoice' => (object) $data]);
 
         return $pdf->download($invoice_number . '.pdf');
+    }
+
+    public function generateRandomPayment()
+    {
+        $payment = new Payment();
+
+        $payment->user_id = User::inRandomOrder()->first()->id;
+        $payment->method_id = DB::table('payments_methods')->inRandomOrder()->first()->id;
+        $payment->currency_id = DB::table('payments_currencies')->inRandomOrder()->first()->id;
+        $payment->status = DB::table('payments_statuses')->inRandomOrder()->first()->id;
+        $payment->amount = rand(1, 10000)/100;
+        $payment->item_name = 'Testowa płatność';
+
+        if($payment->currency_id != 7) {
+            $payment->transaction_id = UUID::uuid4()->toString();
+        }
+
+        $payment->save();
+
+        return redirect()->route('payments.index');
     }
 }

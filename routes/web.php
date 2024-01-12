@@ -86,7 +86,7 @@ Route::middleware([
 
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments.index');
     Route::get('/payments/generate-invoice/{id}', [PaymentsController::class, 'generateInvoice'])->name('generate.invoice');
-
+    Route::get('/payments/generate-random-payment', [PaymentsController::class, 'generateRandomPayment'])->name('generate.payment');
 
     //Route::resource('teachers', TeacherController::class);
 });

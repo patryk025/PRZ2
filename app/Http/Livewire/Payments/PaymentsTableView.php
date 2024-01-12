@@ -45,13 +45,32 @@ class PaymentsTableView extends TableView
         return [
             Header::title(__('Nazwa'))->sortBy('name'),
             Header::title(__('Wystawione na'))->sortBy('user_id'),
-            Header::title(__('Cena'))->sortBy('amount'),
+            Header::title(__('Kwota'))->sortBy('amount'),
             Header::title(__('Metoda płatności'))->sortBy('method_id'),
             Header::title(__('Status'))->sortBy('status'),
             Header::title(__('ID transakcji'))->sortBy('transaction_id'),
             Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
         ];
+    }
+
+    private function colorStatus($payment) {
+        switch ($payment->status()->name) {
+            case 'Oczekująca':
+                return 'yellow';
+            case 'Anulowana':
+                return 'red';
+            case 'Zakończona':
+                return 'green';
+            case 'Nieopłacona':
+                return 'gray';
+            case 'Zwrócona':
+                return 'blue';
+            case 'Odrzucona':
+                return 'red';
+            default:
+                return 'gray';
+        }
     }
 
     /**
@@ -66,7 +85,7 @@ class PaymentsTableView extends TableView
             $model->user->name,
             $model->amount . ' ' . $model->currency()->name,
             $model->method()->name,
-            $model->status()->name,
+            '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-' . $this->colorStatus($model) . '-100 text-' . $this->colorStatus($model) . '-800">' . $model->status()->name . '</span>',
             $model->transaction_id,
             $model->created_at,
             $model->updated_at,
