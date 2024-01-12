@@ -26,7 +26,6 @@ class PaymentsController extends Controller
         $payment = Payment::find($id);
 
         if (!$payment) {
-            // Obsługa przypadku, gdy płatność nie istnieje
             abort(404, 'Płatność nie znaleziona');
         }
 

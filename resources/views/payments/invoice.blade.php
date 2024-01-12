@@ -6,15 +6,25 @@
 		<title>Faktura nr {{ $invoice->id }}</title>
 
 		<style>
+			@font-face {
+				font-family: 'DejaVu Sans';
+				font-style: normal;
+				font-weight: 400;
+				src: url({{ storage_path('fonts/DejaVuSans.ttf') }}) format('truetype');
+			}
+			body {
+				font-family: 'DejaVu Sans', sans-serif;
+			}
+
 			.invoice-box {
 				max-width: 800px;
 				margin: auto;
 				padding: 30px;
 				border: 1px solid #eee;
 				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-				font-size: 16px;
+				font-size: 14px;
 				line-height: 24px;
-				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+				font-family: 'DejaVu Sans', sans-serif;
 				color: #555;
 			}
 
@@ -38,8 +48,8 @@
 			}
 
 			.invoice-box table tr.top table td.title {
-				font-size: 45px;
-				line-height: 45px;
+				font-size: 42px;
+				line-height: 42px;
 				color: #333;
 			}
 
@@ -87,7 +97,7 @@
 			/** RTL **/
 			.invoice-box.rtl {
 				direction: rtl;
-				font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+				font-family: 'DejaVu Sans', sans-serif;
 			}
 
 			.invoice-box.rtl table {
