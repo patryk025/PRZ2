@@ -36,6 +36,10 @@
                         {{ __('Nauczyciele') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('reservations.index') }}" :active="request()->routeIs('reservations.index')">
+                        {{ __('Rezerwacje') }}
+                    </x-jet-nav-link>
+
                     <x-jet-nav-link href="{{ route('payments.index') }}" :active="request()->routeIs('payments.index')">
                         {{ __('Płatności') }}
                     </x-jet-nav-link>
@@ -180,6 +184,10 @@
 
             <x-jet-responsive-nav-link href="{{ route('teachers.index') }}" :active="request()->routeIs('teachers.index')">
                 {{ __('Nauczyciele') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('reservations.index') }}" :active="request()->routeIs('reservations.index')">
+                {{ __('Rezerwacje') }}
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('payments.index') }}" :active="request()->routeIs('payments.index')">
